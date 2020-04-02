@@ -16,7 +16,7 @@ class ThemeAndDate extends Component{
             this.setState((state)=>({
                 date:new Date()
             }))
-        },1000)
+        },500)
         console.log(1)
     }
 

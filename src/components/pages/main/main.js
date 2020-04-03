@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import LettersList from '../../lettersList/lettersList'
+import LettersList from '../../lettersList/lettersList';
+import statuses from '../../../statuses';
 
 class Main extends Component {
     render() { 
         return ( 
-            <LettersList/>
+            <LettersList status={statuses.income}/>
         );
     }
 }

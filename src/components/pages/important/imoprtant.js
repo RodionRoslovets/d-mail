@@ -1,10 +1,10 @@
 import React from 'react';
+import LettersList from '../../lettersList/lettersList';
+import statuses from '../../../statuses';
 
 const Important = () => {
     return ( 
-        <div>
-            Страница важных
-        </div>
+        <LettersList status={statuses.important}/>
      );
 }
  

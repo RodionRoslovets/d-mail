@@ -1,11 +1,11 @@
 import React from 'react';
+import LettersList from '../../lettersList/lettersList';
+import statuses from '../../../statuses';
 
 const Spam = () => {
     return ( 
-        <div>
-            Страница спама
-        </div>
-     );
+        <LettersList status={statuses.spam}/>
+    );
 }
- 
+
 export default Spam;

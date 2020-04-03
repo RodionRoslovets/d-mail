@@ -1,10 +1,10 @@
 import React from 'react';
+import LettersList from '../../lettersList/lettersList';
+import statuses from '../../../statuses';
 
 const Deleted = () => {
     return ( 
-        <div>
-            Страница удаленных
-        </div>
+        <LettersList status={statuses.deleted}/>
      );
 }
  

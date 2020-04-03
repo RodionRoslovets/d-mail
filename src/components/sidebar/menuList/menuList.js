@@ -5,12 +5,12 @@ import MenuListItem from './menuListItem/menuListItem';
 const MenuList = () => {
     return (
         <ul>
-            <MenuListItem text='Входящие' />
-            <MenuListItem text='Отправленные' />
-            <MenuListItem text='Черновики' />
-            <MenuListItem text='Спам' />
-            <MenuListItem text='Важные' />
-            <MenuListItem text='Корзина' />
+            <MenuListItem text='Входящие' to="/"/>
+            <MenuListItem text='Отправленные' to='/' />
+            <MenuListItem text='Черновики' to="/"/>
+            <MenuListItem text='Спам' to="/spam"/>
+            <MenuListItem text='Важные' to="/important"/>
+            <MenuListItem text='Корзина' to="/deleted"/>
         </ul>
     )
 }

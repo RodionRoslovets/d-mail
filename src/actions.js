@@ -1,0 +1,1 @@
+export const openLetter = (id)=>({type:'OPEN_LETTER', payload:id});

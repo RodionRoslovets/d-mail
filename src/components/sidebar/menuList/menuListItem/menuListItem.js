@@ -1,11 +1,15 @@
 import React from 'react';
 
-const MenuListItem = ({text}) => {
-    return ( 
+import { Link } from 'react-router-dom';
+
+const MenuListItem = ({ text, to }) => {
+    return (
         <li>
-            {text}
+            <Link to={to}>
+                {text}
+            </Link>
         </li>
-     );
+    );
 }
- 
+
 export default MenuListItem;

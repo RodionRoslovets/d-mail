@@ -19,41 +19,55 @@ const letters = [
     { heading: 'Рекламное предложение удаленное 2', content: 'Бегал по утрам?', status: 'deleted', key: shortid.generate() }
 ]
 
+function filterPosts(array, template){
+    //поиск в массиве по заданому шаблону
+    return array.filter((item)=>item.heading.match(new RegExp(`${template}` ,'i')))
+}
+
 const reducer = (state = { letters }, action) => {
     switch (action.type) {
         case 'DEL':
+            //пометить письмо как удаленное
             return state = {
                 ...state,
-                letters:letters.map((item)=>{
-                    if(item.key === action.payload){
+                letters: letters.map((item) => {
+                    if (item.key === action.payload) {
                         item.status = 'deleted'
                     }
                     return item
                 })
             }
         case 'SPAM':
+            //пометить письмо как спам
             return state = {
                 ...state,
-                letters:letters.map((item)=>{
-                    if(item.key === action.payload){
+                letters: letters.map((item) => {
+                    if (item.key === action.payload) {
                         item.status = 'spam'
                     }
                     return item
                 })
             }
         case 'IMP':
+            //пометить письмо как важное
             return state = {
                 ...state,
-                letters:letters.map((item)=>{
-                    if(item.key === action.payload){
+                letters: letters.map((item) => {
+                    if (item.key === action.payload) {
                         item.status = 'important'
                     }
                     return item
                 })
             }
+        case 'SEARCH':
+            //поиск
+            let newArr = state.letters
+            return state = {
+                letters: action.payload ? filterPosts(newArr, action.payload) : letters
+            }
         default:
             return state
-            }
     }
+}
 
-    export default reducer
+export default reducer

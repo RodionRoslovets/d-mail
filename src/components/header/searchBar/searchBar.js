@@ -1,9 +1,11 @@
 import React from 'react';
+import * as actions from '../../../actions';
+import { connect } from 'react-redux';
 
-const SearchBar = ()=>{
+const SearchBar = ({search})=>{
     return (
-        <input type="text" style={{width:'100%'}} placeholder="Поиск" />
+        <input onChange={(e)=>{search(e.target.value)}} type="text" style={{width:'100%'}} placeholder="Поиск" />
     )
 }
 
-export default SearchBar;
+export default connect(undefined, actions)(SearchBar);

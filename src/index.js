@@ -9,9 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const store = createStore(reducer);
 
-// console.log(store.getState());
-
-// store.subscribe(() => console.log(store.getState()))
+window.store = store//для разработки
 
 ReactDOM.render(
   <React.StrictMode>

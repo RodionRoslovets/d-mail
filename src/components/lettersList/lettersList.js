@@ -4,7 +4,7 @@ import LetterListItem from "../letterListItem/letterListItem";
 import * as actions from '../../actions';
 // import statuses from '../../statuses';
 
-const LettersList = ({ letters, status, del, imp, spam }) => {
+const LettersList = ({ letters, status, del, imp, spam, restore }) => {
     const newLetters = letters.map((letter) => {
 
         if(letter.status === status){
@@ -17,6 +17,7 @@ const LettersList = ({ letters, status, del, imp, spam }) => {
                         del={del}
                         imp={imp}
                         spam={spam}
+                        restore={restore}
                     />
                 </li >
             )

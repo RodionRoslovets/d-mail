@@ -20,7 +20,7 @@ class App extends Component {
                         <Col md="2">
                             <Sidebar />
                         </Col>
-                        <Col md="10">
+                        <Col md="10" style={{overflowY:'auto', height:'90vh'}}>
                             <Switch>
                                 <Route exact path="/">
                                     <Main />

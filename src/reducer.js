@@ -59,6 +59,17 @@ const reducer = (state = { letters }, action) => {
                     return item
                 })
             }
+        case 'RESTORE':
+            //пометить письмо как входящее
+            return state = {
+                ...state,
+                letters: letters.map((item) => {
+                    if (item.key === action.payload) {
+                        item.status = 'income'
+                    }
+                    return item
+                })
+            }
         case 'SEARCH':
             //поиск
             let newArr = state.letters

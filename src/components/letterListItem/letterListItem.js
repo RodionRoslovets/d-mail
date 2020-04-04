@@ -2,7 +2,7 @@ import React from 'react';
 
 // import { Link } from 'react-router-dom';
 
-const LetterListItem = ({ heading, del, id, imp, spam }) => {
+const LetterListItem = ({ heading, status, del, id, imp, spam, restore }) => {
     const style = {
         width: '100%',
         display: 'flex',
@@ -10,6 +10,14 @@ const LetterListItem = ({ heading, del, id, imp, spam }) => {
         border: '1px solid black',
         padding: '10px',
         marginBottom: '10px'
+    }
+
+    const restoreButton = ()=>{
+        return (
+            <button onClick={()=>{restore(id)}}>
+                <i className="fas fa-trash-restore"></i>
+            </button>
+        )
     }
 
     return (
@@ -21,6 +29,9 @@ const LetterListItem = ({ heading, del, id, imp, spam }) => {
                 <button onClick={()=>{del(id)}}>
                     <i className="fas fa-trash-alt"></i>
                 </button>
+
+                {status !== 'income' ? restoreButton(): null}
+
                 <button onClick={()=>{imp(id)}}>
                     <i className="far fa-star"></i>
                 </button>

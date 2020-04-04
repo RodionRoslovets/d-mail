@@ -4,3 +4,7 @@ export const imp = (id)=>({type:'IMP', payload:id});
 export const spam = (id)=>({type:'SPAM', payload:id});
 export const restore = (id)=>({type:'RESTORE', payload:id});
 export const search = (line)=>({type:'SEARCH', payload:line});
+export const writeTo = (line)=>({type:'WRITE_TO', payload:line});
+export const writeTheme = (line)=>({type:'WRITE_THEME', payload:line});
+export const writeContent = (line)=>({type:'WRITE_CONTENT', payload:line});
+export const send = ()=>({type:'SEND'});

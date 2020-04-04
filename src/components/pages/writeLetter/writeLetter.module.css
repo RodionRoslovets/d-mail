@@ -1,0 +1,7 @@
+.write_form{
+    display: flex;
+    flex-direction: column;
+}
+.write_input, .write_textarea{
+    margin-bottom: 15px;
+}

@@ -1,6 +1,6 @@
 var shortid = require('shortid');
 
-const letters = [
+const incomeLetters = [
     { heading: 'Письмо из банка', content: 'Хошь денег?', status: 'income', key: shortid.generate() },
     { heading: 'Письмо из больницы', content: 'Хошь лекарств?', status: 'income', key: shortid.generate() },
     { heading: 'Письмо из магазина', content: 'Хошь еды?', status: 'income', key: shortid.generate() },
@@ -19,70 +19,101 @@ const letters = [
     { heading: 'Рекламное предложение удаленное 2', content: 'Бегал по утрам?', status: 'deleted', key: shortid.generate() }
 ]
 
+let sendLetters = []
+
 let currLetter = {}
 
-function filterPosts(array, template){
+let writeLetter = {}
+
+function filterLetters(array, template){
     //поиск в массиве по заданому шаблону
     return array.filter((item)=>item.heading.match(new RegExp(`${template}` ,'i')))
 }
 
-const reducer = (state = { letters, currLetter }, action) => {
+function markLetter(array, temp, mark){
+    //Отметить письмо
+    return array.map((item) => {
+        if (item.key === temp) {
+            item.status = mark
+        }
+        return item
+    })
+}
+
+const reducer = (state = { incomeLetters, currLetter, writeLetter, sendLetters }, action) => {
     switch (action.type) {
         case 'OPEN_LETTER':
             //открыть письмо, используя currLetter
             return state = {
                 ...state,
-                currLetter:letters.filter((item)=>item.key === action.payload)[0]
+                currLetter:incomeLetters.filter((item)=>item.key === action.payload)[0]
             }
         case 'DEL':
             //пометить письмо как удаленное
             return state = {
                 ...state,
-                letters: letters.map((item) => {
-                    if (item.key === action.payload) {
-                        item.status = 'deleted'
-                    }
-                    return item
-                })
+                incomeLetters: markLetter(incomeLetters, action.payload, 'deleted')
             }
         case 'SPAM':
             //пометить письмо как спам
             return state = {
                 ...state,
-                letters: letters.map((item) => {
-                    if (item.key === action.payload) {
-                        item.status = 'spam'
-                    }
-                    return item
-                })
+                incomeLetters:markLetter(incomeLetters, action.payload, 'spam')
             }
         case 'IMP':
             //пометить письмо как важное
             return state = {
                 ...state,
-                letters: letters.map((item) => {
-                    if (item.key === action.payload) {
-                        item.status = 'important'
-                    }
-                    return item
-                })
+                incomeLetters:markLetter(incomeLetters, action.payload, 'important')
             }
         case 'RESTORE':
             //пометить письмо как входящее
             return state = {
                 ...state,
-                letters: letters.map((item) => {
-                    if (item.key === action.payload) {
-                        item.status = 'income'
-                    }
-                    return item
-                })
+                incomeLetters:markLetter(incomeLetters, action.payload, 'income')
             }
         case 'SEARCH':
             //поиск
-            let newArr = state.letters
+            let newArr = state.incomeLetters
             return state = {
-                letters: action.payload ? filterPosts(newArr, action.payload) : letters
+                incomeLetters: action.payload ? filterLetters(newArr, action.payload) : incomeLetters
+            }
+        case 'WRITE_TO':
+            return state = {
+                ...state,
+                writeLetter:{
+                    ...state.writeLetter,
+                    to:action.payload ? action.payload : ''
+                }
+            }
+        case 'WRITE_THEME':
+            return state = {
+                ...state,
+                writeLetter:{
+                    ...state.writeLetter,
+                    theme:action.payload ? action.payload : ''
+                }
+            }
+        case 'WRITE_CONTENT':
+            return state = {
+                ...state,
+                writeLetter:{
+                    ...state.writeLetter,
+                    content:action.payload ? action.payload : ''
+                }
+            }
+        case 'SEND':
+            //Отправка письма
+            let letter = {
+                to:state.writeLetter.to,
+                heading:state.writeLetter.theme,
+                content:state.writeLetter.content,
+                key: shortid.generate()
+            }
+            
+            return state = {
+                ...state,
+                sendLetters:[...state.sendLetters, letter]
             }
         default:
             return state

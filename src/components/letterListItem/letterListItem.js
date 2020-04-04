@@ -2,7 +2,7 @@ import React from 'react';
 
 // import { Link } from 'react-router-dom';
 
-const LetterListItem = ({ heading, id }) => {
+const LetterListItem = ({ heading, del, id, imp, spam }) => {
     const style = {
         width: '100%',
         display: 'flex',
@@ -18,13 +18,13 @@ const LetterListItem = ({ heading, id }) => {
                 {heading}
             {/* </Link> */}
             <div className="buttons">
-                <button>
+                <button onClick={()=>{del(id)}}>
                     <i className="fas fa-trash-alt"></i>
                 </button>
-                <button>
+                <button onClick={()=>{imp(id)}}>
                     <i className="far fa-star"></i>
                 </button>
-                <button>
+                <button onClick={()=>{spam(id)}}>
                     <i className="fas fa-ban"></i>
                 </button>
             </div>

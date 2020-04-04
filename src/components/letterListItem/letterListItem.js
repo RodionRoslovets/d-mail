@@ -1,8 +1,8 @@
 import React from 'react';
 
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const LetterListItem = ({ heading, status, del, id, imp, spam, restore }) => {
+const LetterListItem = ({ heading, status, del, id, imp, spam, restore, openLetter }) => {
     const style = {
         width: '100%',
         display: 'flex',
@@ -22,9 +22,9 @@ const LetterListItem = ({ heading, status, del, id, imp, spam, restore }) => {
 
     return (
         <div style={style}>
-            {/* <Link to={`/letters/${id}`}> */}
+            <Link to={`/letters/${id}`} onClick={()=>{openLetter(id)}}>
                 {heading}
-            {/* </Link> */}
+            </Link>
             <div className="buttons">
                 <button onClick={()=>{del(id)}}>
                     <i className="fas fa-trash-alt"></i>

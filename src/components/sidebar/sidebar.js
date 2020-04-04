@@ -1,8 +1,7 @@
 import React from 'react';
-// import {Row, Col} from 'reactstrap';
 import MenuList from './menuList/menuList';
-
-
+import WriteButton from '../writeButton/writeButton';
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
     const style = {
@@ -13,6 +12,9 @@ const Sidebar = () => {
     return (
         <div style={style}>
             <MenuList />
+            <Link to="/write">
+                <WriteButton/>
+            </Link>
         </div>
     )
 }

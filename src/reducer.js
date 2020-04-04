@@ -19,13 +19,21 @@ const letters = [
     { heading: 'Рекламное предложение удаленное 2', content: 'Бегал по утрам?', status: 'deleted', key: shortid.generate() }
 ]
 
+let currLetter = {}
+
 function filterPosts(array, template){
     //поиск в массиве по заданому шаблону
     return array.filter((item)=>item.heading.match(new RegExp(`${template}` ,'i')))
 }
 
-const reducer = (state = { letters }, action) => {
+const reducer = (state = { letters, currLetter }, action) => {
     switch (action.type) {
+        case 'OPEN_LETTER':
+            //открыть письмо, используя currLetter
+            return state = {
+                ...state,
+                currLetter:letters.filter((item)=>item.key === action.payload)[0]
+            }
         case 'DEL':
             //пометить письмо как удаленное
             return state = {

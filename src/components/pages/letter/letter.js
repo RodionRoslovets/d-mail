@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-const Letter = ({ heading, content, id }) => {
+const Letter = ({ heading, content }) => {
     
     return (
         <div>
@@ -16,9 +16,8 @@ const Letter = ({ heading, content, id }) => {
 
 const mapStateToProps = (state)=>{
     return {
-        heading:state.currentLetter.heading,
-        content:state.currentLetter.content,
-        id:state.currentLetter.id
+        heading:state.currLetter.heading,
+        content:state.currLetter.content
     }
 }
 

@@ -8,7 +8,8 @@ import Main from './components/pages/main/main';
 import Spam from './components/pages/spam/spam';
 import Important from './components/pages/important/imoprtant';
 import Deleted from './components/pages/deleted/deleted';
-// import Letter from './components/pages/letter/letter';
+import Letter from './components/pages/letter/letter';
+import WriteLetter from './components/pages/writeLetter/writeLetter';
 
 class App extends Component {
     render() {
@@ -34,9 +35,12 @@ class App extends Component {
                                 <Route path="/deleted">
                                     <Deleted />
                                 </Route>
-                                {/* <Route path="/letters/">
+                                <Route path="/letters/">
                                     <Letter/>
-                                </Route> */}
+                                </Route>
+                                <Route path="/write">
+                                    <WriteLetter/>
+                                </Route>
                             </Switch>
                         </Col>
                     </Row>

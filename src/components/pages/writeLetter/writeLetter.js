@@ -3,10 +3,7 @@ import style from './writeLetter.module.css';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
 
-const WriteLetter = ({ send, writeTo, writeTheme, writeContent }) => {
-
-
-
+const WriteLetter = ({ send, writeTo, writeTheme, writeContent, to, theme, content }) => {
     return (
         <form
             className={style.write_form}
@@ -19,6 +16,7 @@ const WriteLetter = ({ send, writeTo, writeTheme, writeContent }) => {
                 name="to"
                 placeholder="Кому"
                 className={style.write_input}
+                value={to}
                 onChange={(e)=>{
                     writeTo(e.target.value)
                 }} />
@@ -27,6 +25,7 @@ const WriteLetter = ({ send, writeTo, writeTheme, writeContent }) => {
                 name="theme"
                 placeholder="Тема"
                 className={style.write_input}
+                value={theme}
                 onChange={(e)=>{
                     writeTheme(e.target.value)
                 }}/>
@@ -34,6 +33,7 @@ const WriteLetter = ({ send, writeTo, writeTheme, writeContent }) => {
                 placeholder="Текст письма"
                 rows="10"
                 className={style.write_textarea}
+                value={content}
                 onChange={(e)=>{
                     writeContent(e.target.value)
                 }}>
@@ -43,4 +43,12 @@ const WriteLetter = ({ send, writeTo, writeTheme, writeContent }) => {
     );
 }
 
-export default connect(undefined, actions)(WriteLetter);
+const mapStateToProps = (state)=>{
+    return {
+        to:state.writeLetter.to,
+        theme:state.writeLetter.theme,
+        content:state.writeLetter.content
+    }
+}
+
+export default connect(mapStateToProps, actions)(WriteLetter);

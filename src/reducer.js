@@ -1,6 +1,6 @@
 var shortid = require('shortid');
 
-const incomeLetters = [
+const letters = [
     { heading: 'Письмо из банка', content: 'Хошь денег?', status: 'income', key: shortid.generate() },
     { heading: 'Письмо из больницы', content: 'Хошь лекарств?', status: 'income', key: shortid.generate() },
     { heading: 'Письмо из магазина', content: 'Хошь еды?', status: 'income', key: shortid.generate() },
@@ -19,11 +19,13 @@ const incomeLetters = [
     { heading: 'Рекламное предложение удаленное 2', content: 'Бегал по утрам?', status: 'deleted', key: shortid.generate() }
 ]
 
-let sendLetters = []
-
 let currLetter = {}
 
-let writeLetter = {}
+let writeLetter = {
+    to:'',
+    theme:'',
+    content:''
+}
 
 function filterLetters(array, template){
     //поиск в массиве по заданому шаблону
@@ -40,43 +42,43 @@ function markLetter(array, temp, mark){
     })
 }
 
-const reducer = (state = { incomeLetters, currLetter, writeLetter, sendLetters }, action) => {
+const reducer = (state = { letters, currLetter, writeLetter }, action) => {
     switch (action.type) {
         case 'OPEN_LETTER':
             //открыть письмо, используя currLetter
             return state = {
                 ...state,
-                currLetter:incomeLetters.filter((item)=>item.key === action.payload)[0]
+                currLetter:state.letters.filter((item)=>item.key === action.payload)[0]
             }
         case 'DEL':
             //пометить письмо как удаленное
             return state = {
                 ...state,
-                incomeLetters: markLetter(incomeLetters, action.payload, 'deleted')
+                letters: markLetter(state.letters, action.payload, 'deleted')
             }
         case 'SPAM':
             //пометить письмо как спам
             return state = {
                 ...state,
-                incomeLetters:markLetter(incomeLetters, action.payload, 'spam')
+                letters:markLetter(state.letters, action.payload, 'spam')
             }
         case 'IMP':
             //пометить письмо как важное
             return state = {
                 ...state,
-                incomeLetters:markLetter(incomeLetters, action.payload, 'important')
+                letters:markLetter(state.letters, action.payload, 'important')
             }
         case 'RESTORE':
             //пометить письмо как входящее
             return state = {
                 ...state,
-                incomeLetters:markLetter(incomeLetters, action.payload, 'income')
+                letters:markLetter(state.letters, action.payload, 'income')
             }
         case 'SEARCH':
             //поиск
-            let newArr = state.incomeLetters
+            let newArr = state.letters
             return state = {
-                incomeLetters: action.payload ? filterLetters(newArr, action.payload) : incomeLetters
+                letters: action.payload ? filterLetters(newArr, action.payload) : letters
             }
         case 'WRITE_TO':
             return state = {
@@ -108,12 +110,18 @@ const reducer = (state = { incomeLetters, currLetter, writeLetter, sendLetters }
                 to:state.writeLetter.to,
                 heading:state.writeLetter.theme,
                 content:state.writeLetter.content,
+                status:'send',
                 key: shortid.generate()
             }
             
             return state = {
                 ...state,
-                sendLetters:[...state.sendLetters, letter]
+                writeLetter:{
+                    to:'',
+                    theme:'',
+                    content:''
+                },
+                letters:[...state.letters, letter]
             }
         default:
             return state

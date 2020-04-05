@@ -10,6 +10,7 @@ import Important from './components/pages/important/imoprtant';
 import Deleted from './components/pages/deleted/deleted';
 import Letter from './components/pages/letter/letter';
 import WriteLetter from './components/pages/writeLetter/writeLetter';
+import Send from './components/pages/send/send';
 
 class App extends Component {
     render() {
@@ -40,6 +41,9 @@ class App extends Component {
                                 </Route>
                                 <Route path="/write">
                                     <WriteLetter/>
+                                </Route>
+                                <Route path="/send">
+                                    <Send/>
                                 </Route>
                             </Switch>
                         </Col>

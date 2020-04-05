@@ -4,8 +4,8 @@ import LetterListItem from "../letterListItem/letterListItem";
 import * as actions from '../../actions';
 // import statuses from '../../statuses';
 
-const LettersList = ({ incomeLetters, status, del, imp, spam, restore, openLetter }) => {
-    const newLetters = incomeLetters.map((letter) => {
+const LettersList = ({ letters, status, del, imp, spam, restore, openLetter }) => {
+    const newLetters = letters.map((letter) => {
 
         if(letter.status === status){
             return (
@@ -36,7 +36,7 @@ return (
 const mapStateToProps = (state) => {
     return (
         {
-            incomeLetters: state.incomeLetters
+            letters: state.letters
         }
     )
 }

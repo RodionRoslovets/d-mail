@@ -9,3 +9,4 @@ export const writeTheme = (line)=>({type:'WRITE_THEME', payload:line});
 export const writeContent = (line)=>({type:'WRITE_CONTENT', payload:line});
 export const send = ()=>({type:'SEND'});
 export const draft = ()=>({type:'DRAFT'});
+export const edit = ()=>({type:'EDIT'});

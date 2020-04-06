@@ -2,20 +2,20 @@ import React from 'react';
 import style from './writeLetter.module.css';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
-const WriteLetter = ({ draft, send, writeTo, writeTheme, writeContent, to, theme, content }) => {
+const WriteLetter = ({ draft, send, writeTo, writeTheme, writeContent, to, theme, content, is}) => {
     let hist = useHistory();
+
     return (
         <form
             className={style.write_form}
             onSubmit={(e) => {
                 e.preventDefault();
                 send()
-
-                setTimeout(()=>{
+                setTimeout(() => {
                     hist.push('/send')
-                },1000)
+                }, 1000)
 
             }}>
             <input
@@ -50,6 +50,9 @@ const WriteLetter = ({ draft, send, writeTo, writeTheme, writeContent, to, theme
                 (e) => {
                     e.preventDefault()
                     draft()
+                    setTimeout(() => {
+                        hist.push('/draft')
+                    }, 1000)
                 }
             }>В черновик</button>
         </form>

@@ -4,6 +4,7 @@ const statuses = {
     deleted:'deleted',
     important:'important',
     send:'send',
+    draft:'draft',
 }
 
 export default statuses;

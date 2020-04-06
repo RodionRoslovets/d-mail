@@ -26,6 +26,13 @@ const LetterListItem = ({ heading, status, del, id, imp, spam, restore, openLett
             </button>
         )
     }
+    const importantButton = () => {
+        return (
+            <button onClick={() => { imp(id)  }}>
+                <i className="far fa-star"></i>
+            </button>
+        )
+    }
 
     return (
         <div style={style}>
@@ -39,10 +46,7 @@ const LetterListItem = ({ heading, status, del, id, imp, spam, restore, openLett
 
                 {status !== 'income' && status !== 'send' ? restoreButton() : null}
                 {status !== 'spam' && status !== 'send' ? spamButton() : null}
-
-                <button onClick={() => { imp(id) }}>
-                    <i className="far fa-star"></i>
-                </button>
+                {status !== 'spam' && status !== 'send' ? importantButton() : null}
 
             </div>
         </div>

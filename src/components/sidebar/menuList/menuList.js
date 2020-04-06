@@ -7,7 +7,7 @@ const MenuList = () => {
         <ul>
             <MenuListItem text='Входящие' to="/"/>
             <MenuListItem text='Отправленные' to='/send' />
-            <MenuListItem text='Черновики' to="/"/>
+            <MenuListItem text='Черновики' to="/draft"/>
             <MenuListItem text='Спам' to="/spam"/>
             <MenuListItem text='Важные' to="/important"/>
             <MenuListItem text='Корзина' to="/deleted"/>

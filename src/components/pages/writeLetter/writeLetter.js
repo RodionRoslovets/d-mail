@@ -3,7 +3,7 @@ import style from './writeLetter.module.css';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
 
-const WriteLetter = ({ send, writeTo, writeTheme, writeContent, to, theme, content }) => {
+const WriteLetter = ({ draft, send, writeTo, writeTheme, writeContent, to, theme, content }) => {
     return (
         <form
             className={style.write_form}
@@ -17,7 +17,7 @@ const WriteLetter = ({ send, writeTo, writeTheme, writeContent, to, theme, conte
                 placeholder="Кому"
                 className={style.write_input}
                 value={to}
-                onChange={(e)=>{
+                onChange={(e) => {
                     writeTo(e.target.value)
                 }} />
             <input
@@ -26,28 +26,34 @@ const WriteLetter = ({ send, writeTo, writeTheme, writeContent, to, theme, conte
                 placeholder="Тема"
                 className={style.write_input}
                 value={theme}
-                onChange={(e)=>{
+                onChange={(e) => {
                     writeTheme(e.target.value)
-                }}/>
+                }} />
             <textarea
                 placeholder="Текст письма"
                 rows="10"
                 className={style.write_textarea}
                 value={content}
-                onChange={(e)=>{
+                onChange={(e) => {
                     writeContent(e.target.value)
                 }}>
             </textarea>
-            <button>Отправить</button>
+            <input type="submit" />
+            <button onClick={
+                (e) => {
+                    e.preventDefault()
+                    draft()
+                }
+            }>В черновик</button>
         </form>
     );
 }
 
-const mapStateToProps = (state)=>{
+const mapStateToProps = (state) => {
     return {
-        to:state.writeLetter.to,
-        theme:state.writeLetter.theme,
-        content:state.writeLetter.content
+        to: state.writeLetter.to,
+        theme: state.writeLetter.theme,
+        content: state.writeLetter.content
     }
 }
 

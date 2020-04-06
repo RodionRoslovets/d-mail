@@ -16,6 +16,7 @@ const letters = [
     { heading: 'Рекламное предложение 8 2', content: 'Ходишь ходить?', status: 'income', key: shortid.generate() },
     { heading: 'Рекламное предложение важное 2', content: 'Ходишь гулять?', status: 'important', key: shortid.generate() },
     { heading: 'Рекламное предложение 8 3', content: 'Ходишь работать?', status: 'income', key: shortid.generate() },
+    { heading: 'Привет', to:'Someone', content: 'Ходишь работать?', status: 'send', key: shortid.generate() },
     { heading: 'Рекламное предложение удаленное 2', content: 'Бегал по утрам?', status: 'deleted', key: shortid.generate() }
 ]
 
@@ -28,7 +29,7 @@ let writeLetter = {
 }
 
 function filterLetters(array, template){
-    //поиск в массиве по заданому шаблону
+    //поиск строки в массиве по заданому шаблону
     return array.filter((item)=>item.heading.match(new RegExp(`${template}` ,'i')))
 }
 
@@ -113,7 +114,7 @@ const reducer = (state = { letters, currLetter, writeLetter }, action) => {
                 status:'send',
                 key: shortid.generate()
             }
-            
+
             return state = {
                 ...state,
                 writeLetter:{
@@ -122,6 +123,25 @@ const reducer = (state = { letters, currLetter, writeLetter }, action) => {
                     content:''
                 },
                 letters:[...state.letters, letter]
+            }
+        case 'DRAFT':
+            //Создание черновика
+            let draft = {
+                to:state.writeLetter.to,
+                heading:state.writeLetter.theme,
+                content:state.writeLetter.content,
+                status:'draft',
+                key: shortid.generate()
+            }
+
+            return state = {
+                ...state,
+                writeLetter:{
+                    to:'',
+                    theme:'',
+                    content:''
+                },
+                letters:[...state.letters, draft]
             }
         default:
             return state

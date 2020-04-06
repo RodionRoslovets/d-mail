@@ -33,6 +33,13 @@ const LetterListItem = ({ heading, status, del, id, imp, spam, restore, openLett
             </button>
         )
     }
+    const deleteButton = () => {
+        return (
+            <button onClick={() => { del(id)  }}>
+                <i className="fas fa-trash-alt"></i>
+            </button>
+        )
+    }
 
     return (
         <div style={style}>
@@ -40,13 +47,13 @@ const LetterListItem = ({ heading, status, del, id, imp, spam, restore, openLett
                 {heading}
             </Link>
             <div className="buttons">
-                <button onClick={() => { del(id) }}>
-                    <i className="fas fa-trash-alt"></i>
-                </button>
+                {status !== 'deleted' ? deleteButton() : null}
 
-                {status !== 'income' && status !== 'send' ? restoreButton() : null}
-                {status !== 'spam' && status !== 'send' ? spamButton() : null}
-                {status !== 'spam' && status !== 'send' ? importantButton() : null}
+                {status === 'deleted' || status === 'spam' ? restoreButton() : null}
+
+                {status === 'income' ? spamButton() : null}
+
+                {status === 'income' || status === 'important' ? importantButton() : null}
 
             </div>
         </div>

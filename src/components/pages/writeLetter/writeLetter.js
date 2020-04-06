@@ -2,14 +2,21 @@ import React from 'react';
 import style from './writeLetter.module.css';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
+import {useHistory} from 'react-router-dom';
 
 const WriteLetter = ({ draft, send, writeTo, writeTheme, writeContent, to, theme, content }) => {
+    let hist = useHistory();
     return (
         <form
             className={style.write_form}
             onSubmit={(e) => {
                 e.preventDefault();
                 send()
+
+                setTimeout(()=>{
+                    hist.push('/send')
+                },1000)
+
             }}>
             <input
                 type="text"

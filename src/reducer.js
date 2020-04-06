@@ -1,23 +1,23 @@
 var shortid = require('shortid');
 
 const letters = [
-    { heading: 'Письмо из банка', content: 'Хошь денег?', status: 'income', key: shortid.generate() },
-    { heading: 'Письмо из больницы', content: 'Хошь лекарств?', status: 'income', key: shortid.generate() },
-    { heading: 'Письмо из магазина', content: 'Хошь еды?', status: 'income', key: shortid.generate() },
-    { heading: 'Рекламное предложение удаленное 1', content: 'Хошь много денег?', status: 'deleted', key: shortid.generate() },
-    { heading: 'Рекламное предложение 2', content: 'Хошь очень очень много денег?', status: 'income', key: shortid.generate() },
-    { heading: 'Рекламное предложение спам 1', content: 'Хошь очень много денег?', status: 'spam', key: shortid.generate() },
-    { heading: 'Рекламное предложение 4', content: 'Хошь много бабла?', status: 'income', key: shortid.generate() },
-    { heading: 'Рекламное предложение спам 2', content: 'Хочешь увеличить доход?', status: 'spam', key: shortid.generate() },
-    { heading: 'Рекламное предложение 6', content: 'Хошь учиться?', status: 'income', key: shortid.generate() },
-    { heading: 'Рекламное предложение спам 3', content: 'Знаешь реакт?', status: 'spam', key: shortid.generate() },
-    { heading: 'Рекламное предложение 8 1', content: 'Ходишь работать?', status: 'income', key: shortid.generate() },
-    { heading: 'Рекламное предложение важное 1', content: 'Ходишь не работать?', status: 'important', key: shortid.generate() },
-    { heading: 'Рекламное предложение 8 2', content: 'Ходишь ходить?', status: 'income', key: shortid.generate() },
-    { heading: 'Рекламное предложение важное 2', content: 'Ходишь гулять?', status: 'important', key: shortid.generate() },
-    { heading: 'Рекламное предложение 8 3', content: 'Ходишь работать?', status: 'income', key: shortid.generate() },
-    { heading: 'Привет', to:'Someone', content: 'Ходишь работать?', status: 'send', key: shortid.generate() },
-    { heading: 'Рекламное предложение удаленное 2', content: 'Бегал по утрам?', status: 'deleted', key: shortid.generate() }
+    { heading: 'Письмо из банка', content: 'Хошь денег?', type:'income', status: 'income', key: shortid.generate() },
+    { heading: 'Письмо из больницы', content: 'Хошь лекарств?', type:'income', status: 'income', key: shortid.generate() },
+    { heading: 'Письмо из магазина', content: 'Хошь еды?', type:'income', status: 'income', key: shortid.generate() },
+    { heading: 'Рекламное предложение удаленное 1', content: 'Хошь много денег?', type:'income', status: 'deleted', key: shortid.generate() },
+    { heading: 'Рекламное предложение 2', content: 'Хошь очень очень много денег?', type:'income', status: 'income', key: shortid.generate() },
+    { heading: 'Рекламное предложение спам 1', content: 'Хошь очень много денег?', type:'income', status: 'spam', key: shortid.generate() },
+    { heading: 'Рекламное предложение 4', content: 'Хошь много бабла?', type:'income', status: 'income', key: shortid.generate() },
+    { heading: 'Рекламное предложение спам 2', content: 'Хочешь увеличить доход?', type:'income', status: 'spam', key: shortid.generate() },
+    { heading: 'Рекламное предложение 6', content: 'Хошь учиться?', type:'income', status: 'income', key: shortid.generate() },
+    { heading: 'Рекламное предложение спам 3', content: 'Знаешь реакт?', type:'income', status: 'spam', key: shortid.generate() },
+    { heading: 'Рекламное предложение 8 1', content: 'Ходишь работать?', type:'income', status: 'income', key: shortid.generate() },
+    { heading: 'Рекламное предложение важное 1', content: 'Ходишь не работать?', type:'income', status: 'important', key: shortid.generate() },
+    { heading: 'Рекламное предложение 8 2', content: 'Ходишь ходить?', type:'income', status: 'income', key: shortid.generate() },
+    { heading: 'Рекламное предложение важное 2', content: 'Ходишь гулять?', type:'income', status: 'important', key: shortid.generate() },
+    { heading: 'Рекламное предложение 8 3', content: 'Ходишь работать?', type:'income', status: 'income', key: shortid.generate() },
+    { heading: 'Привет', to:'Someone', content: 'Ходишь работать?', type:'send', status: 'send', key: shortid.generate() },
+    { heading: 'Рекламное предложение удаленное 2', content: 'Бегал по утрам?', type:'income', status: 'deleted', key: shortid.generate() }
 ]
 
 let currLetter = {}
@@ -32,6 +32,17 @@ function filterLetters(array, template){
     //поиск строки в массиве по заданому шаблону
     return array.filter((item)=>item.heading.match(new RegExp(`${template}` ,'i')))
 }
+function getType(array, id){
+    //получить тип письма из массива
+    let elem = array.filter((item)=>item.key === id)[0]
+    return elem.type
+}
+function getStatus(array, id){
+    //получить тип письма из массива
+    let elem = array.filter((item)=>item.key === id)[0]
+    return elem.status
+}
+
 
 function markLetter(array, temp, mark){
     //Отметить письмо
@@ -64,16 +75,16 @@ const reducer = (state = { letters, currLetter, writeLetter }, action) => {
                 letters:markLetter(state.letters, action.payload, 'spam')
             }
         case 'IMP':
-            //пометить письмо как важное
+            //пометить письмо как важное/неважное, зависит от статуса
             return state = {
                 ...state,
-                letters:markLetter(state.letters, action.payload, 'important')
+                letters:markLetter(state.letters, action.payload, getStatus(state.letters, action.payload) === 'income' ? 'important' : 'income')
             }
         case 'RESTORE':
-            //пометить письмо как входящее
+            //восстановление письма, зависит от типа
             return state = {
                 ...state,
-                letters:markLetter(state.letters, action.payload, 'income')
+                letters:markLetter(state.letters, action.payload, getType(state.letters, action.payload) === 'income' ? 'income' : 'send')
             }
         case 'SEARCH':
             //поиск
@@ -111,6 +122,7 @@ const reducer = (state = { letters, currLetter, writeLetter }, action) => {
                 to:state.writeLetter.to,
                 heading:state.writeLetter.theme,
                 content:state.writeLetter.content,
+                type:'send',
                 status:'send',
                 key: shortid.generate()
             }
@@ -130,6 +142,7 @@ const reducer = (state = { letters, currLetter, writeLetter }, action) => {
                 to:state.writeLetter.to,
                 heading:state.writeLetter.theme,
                 content:state.writeLetter.content,
+                type:'send',
                 status:'draft',
                 key: shortid.generate()
             }

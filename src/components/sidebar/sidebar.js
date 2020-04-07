@@ -1,19 +1,21 @@
 import React from 'react';
 import MenuList from './menuList/menuList';
-import WriteButton from '../writeButton/writeButton';
 import { Link } from 'react-router-dom';
+import style from './sidebar.module.scss';
+import Button from '../button/button';
+import $ from 'jquery';
 
 const Sidebar = () => {
-    const style = {
-        backgroundColor: '#ccc',
-        border: '1px solid black'
-    }
-
     return (
-        <div style={style}>
-            <MenuList />
+        <div className={style.sidebar}>
+            <Button listener={()=>{
+                $(`.${style.menuList}`).slideToggle()
+            }}>Меню</Button>
+            <MenuList classes={style.menuList}/>
             <Link to="/write">
-                <WriteButton/>
+                <Button>
+                    Написать
+                </Button>
             </Link>
         </div>
     )

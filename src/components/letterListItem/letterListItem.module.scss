@@ -1,0 +1,41 @@
+.letterListItem {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border:1px solid rgba(0,0,0,.1);
+    border-radius:5px;
+    margin-bottom: 10px;
+    transition: all .1s linear;
+    -webkit-transition: all .1s linear;
+    -moz-transition: all .1s linear;
+    -ms-transition: all .1s linear;
+    -o-transition: all .1s linear;
+    &:hover{
+        box-shadow: 0px 0px 3px 1px rgb(0, 110, 190);
+    }
+}
+.letterHeading{
+    flex-grow: 1;
+}
+.letterLink{
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+.buttons{
+    display: flex;
+    align-items: center;
+}
+.restore{
+    color:rgb(11, 185, 185)
+}
+.delete{
+    color:rgb(216, 14, 14)
+}
+.spam{
+    color:rgb(0, 0, 0)
+}
+.important{
+    color:rgb(248, 232, 11)
+}

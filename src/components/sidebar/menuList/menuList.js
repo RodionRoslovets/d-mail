@@ -2,9 +2,9 @@ import React from 'react';
 
 import MenuListItem from './menuListItem/menuListItem';
 
-const MenuList = () => {
+const MenuList = ({classes=''}) => {
     return (
-        <ul>
+        <ul className={classes}>
             <MenuListItem text='Входящие' to="/"/>
             <MenuListItem text='Отправленные' to='/send' />
             <MenuListItem text='Черновики' to="/draft"/>

@@ -1,65 +1,55 @@
 import React from 'react';
 
 import { Link } from 'react-router-dom';
+import Button from '../button/button';
+import style from './letterListItem.module.scss'
 
 const LetterListItem = ({ heading, status, del, id, imp, spam, restore, openLetter }) => {
-    const style = {
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'space-between',
-        border: '1px solid black',
-        padding: '10px',
-        marginBottom: '10px'
-    }
-
-    const restoreButton = () => {
-        return (
-            <button onClick={() => { restore(id) }}>
-                <i className="fas fa-trash-restore"></i>
-            </button>
-        )
-    }
-    const spamButton = () => {
-        return (
-            <button onClick={() => { spam(id) }}>
-                <i className="fas fa-ban"></i>
-            </button>
-        )
-    }
-    const importantButton = () => {
-        return (
-            <button onClick={() => { imp(id)  }}>
-                <i className="far fa-star"></i>
-            </button>
-        )
-    }
-    const deleteButton = () => {
-        return (
-            <button onClick={() => { del(id)  }}>
-                <i className="fas fa-trash-alt"></i>
-            </button>
-        )
-    }
 
     return (
-        <div style={style}>
-            <Link to={`/letters/${id}`} onClick={() => { openLetter(id) }}>
-                {heading}
-            </Link>
-            <div className="buttons">
-                {status !== 'deleted' ? deleteButton() : null}
+        <div className={style.letterListItem}>
+            <div className={style.letterHeading}>
+                <Link className={style.letterLink} to={`/letters/${id}`} onClick={() => { openLetter(id) }}>
+                    {heading}
+                </Link>
+            </div>
+            <div className={style.buttons}>
 
-                {status === 'deleted' || status === 'spam' ? restoreButton() : null}
+                {status !== 'deleted'
+                    ? <Button
+                        classes={style.delete}
+                        listener={() => { del(id) }}>
+                        <i className="fas fa-trash-alt"></i>
+                    </Button>
+                    : null}
 
-                {status === 'income' ? spamButton() : null}
+                {status === 'deleted' || status === 'spam' || status === 'important'
+                    ? <Button
+                        classes={style.restore}
+                        listener={() => { restore(id) }}>
+                        <i className="fas fa-trash-restore"></i>
+                    </Button>
+                    : null}
 
-                {status === 'income' || status === 'important' ? importantButton() : null}
+                {status === 'income'
+                    ? <Button
+                        classes={style.spam}
+                        listener={() => { spam(id) }}>
+                        <i className="fas fa-ban"></i>
+                    </Button>
+                    : null}
+
+                {status === 'income' 
+                    ? <Button
+                        classes={style.important}
+                        listener={() => { imp(id) }}>
+                        <i className="far fa-star"></i>
+                    </Button>
+                    : null}
 
             </div>
         </div>
     );
 }
-
-
 
 export default LetterListItem;

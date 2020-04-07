@@ -92,6 +92,7 @@ const reducer = (state = { letters, currLetter, writeLetter }, action) => {
             //поиск
             let newArr = state.letters
             return state = {
+                ...state,
                 letters: action.payload ? filterLetters(newArr, action.payload) : letters
             }
         case 'WRITE_TO':

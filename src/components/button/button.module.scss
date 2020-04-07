@@ -1,0 +1,12 @@
+.button{
+    background: transparent;
+    border: none;
+    transition: all .1s linear;
+    -webkit-transition: all .1s linear;
+    -moz-transition: all .1s linear;
+    -ms-transition: all .1s linear;
+    -o-transition: all .1s linear;
+    &:focus{
+        outline: none;
+    }
+}

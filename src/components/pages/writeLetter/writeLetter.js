@@ -1,10 +1,11 @@
 import React from 'react';
-import style from './writeLetter.module.css';
+import style from './writeLetter.module.scss';
 import { connect } from 'react-redux';
 import * as actions from '../../../actions';
 import { useHistory } from 'react-router-dom';
+import Button from '../../button/button'
 
-const WriteLetter = ({ draft, send, writeTo, writeTheme, writeContent, to, theme, content, is}) => {
+const WriteLetter = ({ draft, send, writeTo, writeTheme, writeContent, to, theme, content }) => {
     let hist = useHistory();
 
     return (
@@ -45,8 +46,8 @@ const WriteLetter = ({ draft, send, writeTo, writeTheme, writeContent, to, theme
                     writeContent(e.target.value)
                 }}>
             </textarea>
-            <input type="submit" />
-            <button onClick={
+            <Button type="submit">Отправить</Button>
+            <Button listener={
                 (e) => {
                     e.preventDefault()
                     draft()
@@ -54,7 +55,7 @@ const WriteLetter = ({ draft, send, writeTo, writeTheme, writeContent, to, theme
                         hist.push('/draft')
                     }, 1000)
                 }
-            }>В черновик</button>
+            }>Сохранить черновик</Button>
         </form>
     );
 }

@@ -13,6 +13,8 @@ import WriteLetter from './components/pages/writeLetter/writeLetter';
 import Send from './components/pages/send/send';
 import Draft from './components/pages/draft/draft';
 
+import style from './App.module.scss'
+
 class App extends Component {
     render() {
         return (
@@ -23,7 +25,7 @@ class App extends Component {
                         <Col md="2">
                             <Sidebar />
                         </Col>
-                        <Col md="10" style={{overflowY:'auto', height:'90vh'}}>
+                        <Col md="10"  className={style.main}>
                             <Switch>
                                 <Route exact path="/">
                                     <Main />

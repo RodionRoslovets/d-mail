@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Row, Col} from 'reactstrap';
-
+import style from './themeAndDate.module.scss';
 
 class ThemeAndDate extends Component{
     constructor(){
@@ -25,16 +25,12 @@ class ThemeAndDate extends Component{
 
     render(){
         const {date} = this.state;
+        const hours = date.getHours() > 9 ? date.getHours() : `0${date.getHours()}`
+        const minutes = date.getMinutes() > 9 ? date.getMinutes() : `0${date.getMinutes()}`
         return(
             <Row>
-                <Col md='6'>
-                    <label>
-                        <p>Включить темную тему</p>
-                        <input type="checkbox" hidden/>
-                    </label>
-                </Col>
-                <Col md='6'>
-                    <p>{`${date.getHours()}:${date.getMinutes()}`}</p>
+                <Col md='12'>
+                    <p className={style.date}>{`${hours}:${minutes}`}</p>
                 </Col>
             </Row>
         )
